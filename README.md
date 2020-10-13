@@ -1,3 +1,3 @@
-#:zap: Tesla :zap:
+# :zap: Tesla :zap:
 
 Electric car expenses calculator
