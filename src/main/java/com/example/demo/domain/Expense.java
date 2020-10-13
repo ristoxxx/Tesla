@@ -1,5 +1,69 @@
 package com.example.demo.domain;
 
-public class Expense {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+import com.example.demo.domain.Car;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+public class Expense {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+	private String company;
+    private Double kwh;
+    private Double price;
+    
+    
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "carid")
+    private Car car;
+    
+    public Expense() {}
+
+	public Expense(String company, Double kwh, Double price,Car car) {
+		super();
+		this.company = company;
+		this.kwh = kwh;
+		this.price = price;
+		this.car = car;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public Double getKwh() {
+		return kwh;
+	}
+
+	public void setKwh(Double kwh) {
+		this.kwh = kwh;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Car getCar() {
+		return car;
+	}
+
+	public void setCar(Car car) {
+		this.car = car;
+	}
 }
