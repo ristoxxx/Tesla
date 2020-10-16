@@ -1,5 +1,9 @@
 package com.example.demo.domain;
 
-public class ExpenseRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface ExpenseRepository extends CrudRepository<Driver, Long> {
+
+	Expense findByUsername(String company);
 
 }

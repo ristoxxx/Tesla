@@ -26,5 +26,15 @@ public class CarController {
 	public String main() {
 		return "main";
 	}
+	
+	@RequestMapping(value = "/editcar")
+	public String editcar() {
+		return "editcar";
+	}
+	
+	@RequestMapping(value = "/editexpense")
+	public String editexpense(  ) {
+		return "editexpense";
+	}
 
 }
