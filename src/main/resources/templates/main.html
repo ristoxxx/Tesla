@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Tesla</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -9,7 +9,7 @@
 <h1>Kulut</h1>
 <div class="col-md-4" style="padding:20px 0">
 		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-danger"/>
 		</form>
 	</div>
     <table class="table table-striped">
@@ -25,9 +25,9 @@
     		<td th:text="${expense.kwh}"></td>
     		<td th:text="${expense.price}"></td>
     		<td th:text="${expense.car.name}"></td>
+    			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editexpense/{id}(id=${expense.id})}" class="btn btn-xs btn-success">Muokkaa</a></td>
     	</tr>
      </table>
 	<a href="/editcar" class="btn btn-sm btn-success">Muokkaa auton tietoja</a>
-	<a href="/editexpense" class="btn btn-sm btn-success">Muokkaa kuluja</a>
 </body>
 </html>

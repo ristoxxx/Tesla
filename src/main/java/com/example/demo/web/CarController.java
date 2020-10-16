@@ -3,7 +3,9 @@ package com.example.demo.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 //import com.example.demo.domain.CarRepository;
 //
@@ -25,7 +27,7 @@ public class CarController {
 		return "login";
 	}
 	
-	@RequestMapping(value = "/main")	
+	@RequestMapping(value = {"/", "/main"})	
     public String expenseList(Model model) {	
         model.addAttribute("expenses", repository.findAll());
         return "main";
@@ -36,9 +38,16 @@ public class CarController {
 		return "editcar";
 	}
 	
-	@RequestMapping(value = "/editexpense")
-	public String editexpense(  ) {
-		return "editexpense";
-	}
-
+	
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(Expense expense){
+        repository.save(expense);
+        return "redirect:main";
+    }
+	
+	@RequestMapping(value= "/editexpense/{id}", method = RequestMethod.GET)
+    public String editbook(@PathVariable("id") Long id, Model model){
+    	model.addAttribute("expense", repository.findById(id));  	
+    	return "editexpense";
+    }
 }

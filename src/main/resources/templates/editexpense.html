@@ -1,11 +1,34 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add book</title>
+    <title>Muokkaa kulua</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p>Edit Ex</p>
-<a href="/main" class="btn btn-sm btn-success">Palaa etusivulle</a>
+	<h1>Muokkaa kulua</h1>
+	<div>
+		<form th:object="${expense}" th:action="@{../save}" action="#" method="post">
+			<input type="hidden" id="id" th:field="*{id}" />
+		  	<label for="fname">Firma</label>
+			<input type="text" id="fname" th:field="*{company}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="title">Kwh</label>
+			<input type="text" th:field="*{kwh}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="isbn">Euroa</label>
+			<input type="text" th:field="*{price}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="category"></label>
+			<input type="hidden" th:field="*{car.carid}" />
+			
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Tallenna"></input>
+		</form>
+	</div>
+	<a href="/main" class="btn btn-sm btn-success">Palaa etusivulle</a>
 </body>
 </html>
