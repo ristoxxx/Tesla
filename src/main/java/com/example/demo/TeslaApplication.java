@@ -7,9 +7,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-
+import com.example.demo.domain.Car;
+import com.example.demo.domain.CarRepository;
 import com.example.demo.domain.Driver;
 import com.example.demo.domain.DriverRepository;
+import com.example.demo.domain.Expense;
+import com.example.demo.domain.ExpenseRepository;
 
 @SpringBootApplication
 public class TeslaApplication {
@@ -18,13 +21,17 @@ public class TeslaApplication {
 		SpringApplication.run(TeslaApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner bookDemo(DriverRepository urepository) {
+	public CommandLineRunner bookDemo(DriverRepository urepository, CarRepository crepository, ExpenseRepository erepository) {
 		return (args) -> {
 			//log.info("save a couple of students");
 			
-			//crepository.save(new Category("Kauhu"));
+			crepository.save(new Car("eGolf"));
+			crepository.save(new Car("Tesla"));
 			//crepository.save(new Category("Musiikki"));
 			//crepository.save(new Category("Scifi"));
+
+			erepository.save(new Expense("K-sähkö", 20.5, 10.3, crepository.findByName("eGolf")));
+			erepository.save(new Expense("Voltti", 7.5, 3.2, crepository.findByName("Tesla")));
 
 			//brepository.save(new Book("Kalevi", "Mäkelä", "Avaruus", "ISBN", 2015, crepository.findByName("Scifi").get(0)));
 			//brepository.save(new Book("Joonas", "Mäkelä", "Oodi", "962-234 533", 1999, crepository.findByName("Musiikki").get(0)));

@@ -1,9 +1,11 @@
 package com.example.demo.domain;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
-public interface CarRepository extends CrudRepository<Driver, Long> {
+public interface CarRepository extends CrudRepository<Car, Long> {
 
-	Car findByUsername(String username);
+	Car findByName(String username);
 
 }

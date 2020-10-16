@@ -1,12 +1,32 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add book</title>
+    <title>Tesla</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
-<p>Moi!</p>
+<h1>Kulut</h1>
+<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+    <table class="table table-striped">
+		<tr>
+		    <th>Yritys</th>
+		    <th>Kwh</th>
+		    <th>€</th>
+		    <th>Auto</th>
+		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
+		</tr>  
+    	<tr th:each = "expense : ${expenses}">
+    		<td th:text="${expense.company}"></td>
+    		<td th:text="${expense.kwh}"></td>
+    		<td th:text="${expense.price}"></td>
+    		<td th:text="${expense.car.name}"></td>
+    	</tr>
+     </table>
 	<a href="/editcar" class="btn btn-sm btn-success">Muokkaa auton tietoja</a>
 	<a href="/editexpense" class="btn btn-sm btn-success">Muokkaa kuluja</a>
 </body>
