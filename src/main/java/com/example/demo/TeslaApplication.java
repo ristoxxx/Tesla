@@ -25,14 +25,14 @@ public class TeslaApplication {
 		return (args) -> {
 			//log.info("save a couple of students");
 			
-			crepository.save(new Car("eGolf"));
-			crepository.save(new Car("Tesla"));
+			crepository.save(new Car("golf"));
+			crepository.save(new Car("tesla"));
 			//crepository.save(new Category("Musiikki"));
 			//crepository.save(new Category("Scifi"));
 
-			erepository.save(new Expense("K-sähkö", 20.5, 10.3, crepository.findByName("eGolf")));
-			erepository.save(new Expense("Voltti", 7.5, 3.2, crepository.findByName("Tesla")));
-
+			erepository.save(new Expense("K-sähkö", 20.5, 10.3, crepository.findByName("golf")));
+			erepository.save(new Expense("Voltti", 7.5, 3.2, crepository.findByName("tesla")));
+		
 			//brepository.save(new Book("Kalevi", "Mäkelä", "Avaruus", "ISBN", 2015, crepository.findByName("Scifi").get(0)));
 			//brepository.save(new Book("Joonas", "Mäkelä", "Oodi", "962-234 533", 1999, crepository.findByName("Musiikki").get(0)));
 			//brepository.save(new Book("Mikko", "Mäkelä", "Java", "824-321 234", 2005, crepository.findByName("Scifi").get(0)));

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Tesla</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+<h1>Kulut</h1>
+<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+    <table class="table table-striped">
+		<tr>
+		    <th>Yritys</th>
+		    <th>Kwh</th>
+		    <th>€</th>
+		    <th>Auto</th>
+		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
+		</tr>  
+    	<tr th:each = "expense : ${expenses}">
+    		<td th:text="${expense.company}"></td>
+    		<td th:text="${expense.kwh}"></td>
+    		<td th:text="${expense.price}"></td>
+    		<td th:text="${expense.car.name}"></td>
+    			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editexpense/{id}(id=${expense.id})}" class="btn btn-xs btn-success">Muokkaa</a></td>
+    	</tr>
+     </table>
+	<a href="/etusivu" class="btn btn-sm btn-success">Palaa etusivulle</a>
+</body>
+</html>
