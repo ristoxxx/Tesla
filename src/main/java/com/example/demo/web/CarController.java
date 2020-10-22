@@ -33,6 +33,12 @@ public class CarController {
         return "etusivu";
 	}
 	
+	@RequestMapping(value = "/cars")	
+    public String expenseLis(Model model) {	
+        model.addAttribute("cars", crepository.findAll());
+        return "cars";
+	}
+	
 	@RequestMapping(value = "/tesla")	
     public String expenList(Model model) {	
         model.addAttribute("expenses", repository.findByCar(crepository.findByName("tesla")));
