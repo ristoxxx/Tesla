@@ -1,12 +1,13 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Muokkaa kulua</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
 	<h1>Muokkaa kulua</h1>
-	<div>
+	<div class="col-md-4" style="padding:20px 0">
 		<form th:object="${expense}" th:action="@{../save}" action="#" method="post">
 			<input type="hidden" id="id" th:field="*{id}" />
 		  	<label for="fname">Firma</label>
@@ -28,7 +29,8 @@
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" value="Tallenna"></input>
 		</form>
+		<a href="/cars" class="btn btn-sm btn-success">Palaa etusivulle</a>
 	</div>
-	<a href="/main" class="btn btn-sm btn-success">Palaa etusivulle</a>
+	
 </body>
 </html>

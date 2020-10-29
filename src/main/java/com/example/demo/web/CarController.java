@@ -1,6 +1,7 @@
 package com.example.demo.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,9 @@ import com.example.demo.domain.ExpenseRepository;
 public class CarController {
 	
 	@Autowired
+	JdbcTemplate jdbcTemplate;
+	
+	@Autowired
 	private ExpenseRepository repository;
 	
 	@Autowired
@@ -27,29 +31,21 @@ public class CarController {
 		return "login";
 	}
 	
-	@RequestMapping(value = {"/", "/etusivu"})	
+	@RequestMapping(value = "/etusivu")	
     public String expenseList(Model model) {	
         model.addAttribute("expenses", repository.findAll());
         return "etusivu";
 	}
 	
-	@RequestMapping(value = "/cars")	
+	@RequestMapping(value = {"/", "/cars"})	
     public String expenseLis(Model model) {	
         model.addAttribute("cars", crepository.findAll());
         return "cars";
 	}
 	
-	@RequestMapping(value = "/tesla")	
-    public String expenList(Model model) {	
-        model.addAttribute("expenses", repository.findByCar(crepository.findByName("tesla")));
-        return "tesla";
-	}
 	
-	@RequestMapping(value = "/golf")	
-    public String expList(Model model) {	
-        model.addAttribute("expenses", repository.findByCar(crepository.findByName("golf")));
-        return "tesla";
-	}
+	
+	
 	
 	@RequestMapping(value = "/main")	
     public String expeList(Model model) {	
@@ -58,15 +54,30 @@ public class CarController {
 	}
 	
 	@RequestMapping(value = "/editcar")
-	public String editcar() {
+	public String editcar(Model model) {
+		model.addAttribute("cars", crepository.findAll());
 		return "editcar";
 	}
+	
+	@RequestMapping(value = "/{id}")	
+    public String eList(@PathVariable("id") String ide, Model model) {	
+        model.addAttribute("expenses", repository.findByCar(crepository.findByName(ide)));
+        return "tesla";
+	}
+	
+	
+	@RequestMapping(value= "/editcar/{id}", method = RequestMethod.GET)
+    public String editcar(@PathVariable("id") Long id, Model model){
+    	model.addAttribute("car", crepository.findById(id));  	
+    	return "editcar";
+    }
+	
 	
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Expense expense){
         repository.save(expense);
-        return "redirect:main";
+        return "redirect:cars";
     }
 	
 	@RequestMapping(value= "/editexpense/{id}", method = RequestMethod.GET)

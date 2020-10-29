@@ -1,11 +1,22 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-    <title>Add book</title>
+    <title>Muokkaa Autoa</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
-<p>Tesla</p>
-<a href="/main" class="btn btn-sm btn-success">Palaa etusivulle</a>
+	<h1>Muokkaa Autoa</h1>
+	<div>
+		<form th:object="${car}" th:action="@{../save}" action="#" method="post">
+			<input type="hidden" id="id" th:field="*{carid}" />
+		  	<label for="fname">Merkki</label>
+			<input type="text" id="fname" th:field="*{name}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Tallenna"></input>
+		</form>
+	</div>
+	<a href="/cars" class="btn btn-sm btn-success">Palaa etusivulle</a>
 </body>
 </html>
