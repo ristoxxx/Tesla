@@ -12,22 +12,27 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Car {
+	//lines to automatically create unique id
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long carid;
+    //car object properties
     private String name;
     private int sum = 0;
     
+    //joining database tables so that every car have list of expenses
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "car")
 	private List<Expense> expenses;
-
+    
+    //empty constructor
 	public Car() {}
     
+	//actual constructor
     public Car(String name) {
-    	super();
+    	super();//id is automatically created and is inherited from super class
     	this.name = name;
     }
-
+    //rest is just basic getters and setters
 	public Long getCarid() {
 		return carid;
 	}

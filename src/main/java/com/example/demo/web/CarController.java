@@ -2,12 +2,14 @@ package com.example.demo.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.demo.domain.Car;
 import com.example.demo.domain.CarRepository;
 //
 import com.example.demo.domain.Expense;
@@ -71,8 +73,11 @@ public class CarController {
     	model.addAttribute("car", crepository.findById(id));  	
     	return "editcar";
     }
-	
-	
+	@RequestMapping(value = "/savecar", method = RequestMethod.POST)
+    public String save(Car car){
+        crepository.save(car);
+        return "redirect:cars";
+    }
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Expense expense){
@@ -85,4 +90,11 @@ public class CarController {
     	model.addAttribute("expense", repository.findById(id));  	
     	return "editexpense";
     }
+	
+	@RequestMapping(value = "/add/{id}")
+    public String addExpense(@PathVariable("id") Long ids, Model model){
+    	model.addAttribute("expense", new Expense());
+    	model.addAttribute("car", crepository.findById(ids));
+        return "editexpense";
+	}
 }

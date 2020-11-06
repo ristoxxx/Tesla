@@ -8,7 +8,7 @@
 <body>
 	<h1>Muokkaa Autoa</h1>
 	<div>
-		<form th:object="${car}" th:action="@{../save}" action="#" method="post">
+		<form th:object="${car}" th:action="@{../savecar}" action="#" method="post">
 			<input type="hidden" id="id" th:field="*{carid}" />
 		  	<label for="fname">Merkki</label>
 			<input type="text" id="fname" th:field="*{name}" />
