@@ -6,12 +6,12 @@
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
-	<h1>Muokkaa kulua</h1>
+	<h1>Lisää kulu</h1>
 	<div class="col-md-4" style="padding:20px 0">
 		<form th:object="${expense}" th:action="@{../save}" action="#" method="post">
 			<input type="hidden" id="id" th:field="*{id}" />
 		  	<label for="company">Firma</label>
-			<input type="text" id="fname" th:field="*{company}" />
+			<input type="text" id="company" th:field="*{company}"/>
 			
 			<div style="clear: both; display: block; height: 10px;"></div>
 		  	<label for="kwh">Kwh</label>
@@ -23,14 +23,12 @@
 			
 			<div style="clear: both; display: block; height: 10px;"></div>
 		  	<label for="car"></label>
-			<input type="hidden" th:field="*{car.carid}" />
-			
-			
+			<input type="hidden" th:value="${car}" id="car.carid" name="car.carid"/>
+			<p th:object="${car}" th:text="${car}"></p>
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" value="Tallenna"></input>
 		</form>
 		<a href="/cars" class="btn btn-sm btn-success">Palaa etusivulle</a>
 	</div>
-	
 </body>
 </html>
