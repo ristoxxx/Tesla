@@ -24,12 +24,12 @@
     		
     		<td th:text="${expense.company}"></td>
     		<td th:text="${expense.kwh}"></td>
-    		<td th:text="${expense.price}"></td>
-    			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${expense.id})}" class="btn btn-xs btn-danger">Delete</a></td>    			
+    		<td th:text="${expense.price}"></td>    			    			
     			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editexpense/{id}(id=${expense.id})}" class="btn btn-xs btn-success">Muokkaa</a></td>
+				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${expense.id})}" class="btn btn-xs btn-danger">Poista</a></td>
     	</tr>
      </table>
-    <p th:text="${number}"></p>
+    
 	<a href="/cars" class="btn btn-sm btn-success">Palaa etusivulle</a>
 	<a th:href="@{/add/{id}(id=${number})}" class="btn btn-sm btn-success">Lisää laskuttaja</a>
 </body>

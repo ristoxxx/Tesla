@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Lisää auto</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Lisää auto</h1>
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:object="${car}" th:action="@{../savecar}" action="#" method="post">
+			<input type="hidden" id="id" th:field="*{carid}" />
+		  	<label for="name">Merkki</label>
+			<input type="text" id="name" th:field="*{name}"/>
+			
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Tallenna"></input>
+		</form>
+		<a href="/cars" class="btn btn-sm btn-success">Palaa etusivulle</a>
+	</div>
+</body>
+</html>
