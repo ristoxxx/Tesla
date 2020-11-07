@@ -33,31 +33,25 @@ public class CarController {
 		return "login";
 	}
 	
-	@RequestMapping(value = "/etusivu")	
-    public String expenseList(Model model) {	
-        model.addAttribute("expenses", repository.findAll());
-        return "etusivu";
-	}
-	
-	@RequestMapping(value = {"/", "/cars"})	
+	@RequestMapping(value = {"/", "/cars"}, method = RequestMethod.GET)	
     public String expenseLis(Model model) {	
         model.addAttribute("cars", crepository.findAll());
         return "cars";
 	}
 	
-	@RequestMapping(value = "/main")	
+	@RequestMapping(value = "/main", method = RequestMethod.GET)	
     public String expeList(Model model) {	
         model.addAttribute("expenses", repository.findAll());
         return "main";
 	}
 	
-	@RequestMapping(value = "/editcar")
+	@RequestMapping(value = "/editcar", method = RequestMethod.GET)
 	public String editcar(Model model) {
 		model.addAttribute("cars", crepository.findAll());
 		return "editcar";
 	}
 	
-	@RequestMapping(value = "/{id}")	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)	
     public String eList(@PathVariable("id") Long ide, Model model) {	
         model.addAttribute("expenses", repository.findByCar(crepository.findByCarid(ide)));
         model.addAttribute("number", ide);

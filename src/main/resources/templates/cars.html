@@ -22,8 +22,9 @@
 
     		<td th:text="${car.name}"></td>
     			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/{car} (car=${car.carid})}" class="btn btn-xs btn-success">Valitse</a></td>
-    			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editcar/{car} (car=${car.carid})}" class="btn btn-xs btn-success">Muokkaa</a></td>
+    			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editcar/{car} (car=${car.carid})}" class="btn btn-xs btn-success">Muokkaa autoa</a></td>
     	</tr>
      </table>
+     <a href="/main" class="btn btn-xs btn-success">Yhteenveto</a>
 </body>
 </html>
