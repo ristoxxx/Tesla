@@ -2,6 +2,7 @@ package com.example.demo.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 //import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -88,4 +89,13 @@ public class CarController {
     	model.addAttribute("car", ids);
         return "addexpense";
 	}
+	
+	//Delete student
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteExpense(@PathVariable("id") Long eid, Model model) {
+    	repository.deleteById(eid);
+        return "redirect:../cars";
+    }
+	
 }
