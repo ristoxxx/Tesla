@@ -11,9 +11,7 @@
 		<form th:object="${car}" th:action="@{../savecar}" action="#" method="post">
 			<input type="hidden" id="id" th:field="*{carid}" />
 		  	<label for="name">Merkki</label>
-			<input type="text" id="name" th:field="*{name}"/>
-			
-			
+			<input type="text" id="name" th:field="*{name}"/>			
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" value="Tallenna"></input>
 		</form>

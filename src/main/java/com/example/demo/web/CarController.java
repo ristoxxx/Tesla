@@ -6,6 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 //import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import com.example.demo.domain.Expense;
 //
 import com.example.demo.domain.ExpenseRepository;
 
+@CrossOrigin
 @Controller
 public class CarController {
 	
@@ -79,6 +81,15 @@ public class CarController {
         crepository.save(car);
         return "redirect:cars";
     }
+	
+	//Delete car
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @RequestMapping(value = "/deletecar/{id}", method = RequestMethod.GET)
+    public String deleteCar(@PathVariable("id") Long cid, Model model) {
+    	crepository.deleteById(cid);
+        return "redirect:../cars";
+    }
+	
 	//Save expense
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Expense expense){
