@@ -43,10 +43,16 @@ public class CarController {
 	}
 	
 	//Show list of cars = main page
-	@RequestMapping(value = {"/", "/cars"}, method = RequestMethod.GET)	
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@RequestMapping(value = "/cars", method = RequestMethod.GET)	
     public String expenseLis(Model model) {	
         model.addAttribute("cars", crepository.findAll());
         return "cars";
+	}
+	
+	@RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)	
+    public String exenseLis() {	      
+        return "welcome";
 	}
 	
 	@RequestMapping(value = "/acars/{id}", method = RequestMethod.GET)	
@@ -72,7 +78,7 @@ public class CarController {
 	//Edit car
 	@RequestMapping(value= "/editcar/{id}", method = RequestMethod.GET)
     public String editcar(@PathVariable("id") Long id, Model model){
-    	model.addAttribute("car", crepository.findById(id));  	
+    	model.addAttribute("car", crepository.findById(id)); 
     	return "editcar";
     }
 	
@@ -80,6 +86,7 @@ public class CarController {
 		@RequestMapping(value = "/addcar", method = RequestMethod.GET)
 	    public String addCar(Model model){
 	    	model.addAttribute("car", new Car());
+	    	model.addAttribute("drivers", drepository.findAll());
 	        return "addcar";
 		}
 	
@@ -88,7 +95,7 @@ public class CarController {
 	@RequestMapping(value = "/savecar", method = RequestMethod.POST)
     public String save(Car car){
         crepository.save(car);
-        return "redirect:cars";
+        return "redirect:welcome";
     }
 	
 	//Delete car
@@ -103,7 +110,7 @@ public class CarController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Expense expense){
         repository.save(expense);
-        return "redirect:cars";
+        return "redirect:welcome";
     }
 	//Edit expense
 	@RequestMapping(value= "/editexpense/{id}", method = RequestMethod.GET)
@@ -124,7 +131,7 @@ public class CarController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteExpense(@PathVariable("id") Long eid, Model model) {
     	repository.deleteById(eid);
-        return "redirect:../cars";
+        return "redirect:../main";
     }
 	
 }

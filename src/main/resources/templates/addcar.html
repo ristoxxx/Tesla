@@ -11,7 +11,9 @@
 		<form th:object="${car}" th:action="@{../savecar}" action="#" method="post">
 			<input type="hidden" id="id" th:field="*{carid}" />
 		  	<label for="name">Merkki</label>
-			<input type="text" id="name" th:field="*{name}"/>			
+			<input type="text" id="name" th:field="*{name}"/>		
+			<select id="clist" th:field="*{driver}" class="form-control">
+       			<option th:each="driver: ${drivers}" th:value="${driver.id}" th:text="${driver.username}"></option>	
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" value="Tallenna"></input>
 		</form>

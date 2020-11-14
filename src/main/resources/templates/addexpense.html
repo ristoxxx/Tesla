@@ -3,10 +3,11 @@
 <head>
     <title>Muokkaa kulua</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
 </head>
 <body>
-	<h1>Lisää kulu</h1>
+	<h1>Lisää laskuttaja</h1>
+	<a th:href="@{/acars/{car} (car=${#authentication.getPrincipal().getUsername()})}" class="btn btn-sm btn-danger">Palaa etusivulle</a>
 	<div class="col-md-4" style="padding:20px 0">
 		<form th:object="${expense}" th:action="@{../save}" action="#" method="post">
 			<input type="hidden" id="id" th:field="*{id}" />
@@ -21,13 +22,13 @@
 		  	<label for="sum">Euroa</label>
 			<input type="text" th:field="*{price}" />
 			
-			<div style="clear: both; display: block; height: 10px;"></div>
 		  	<label for="car"></label>
 			<input type="hidden" th:value="${car}" id="car.carid" name="car.carid"/>
+			
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="submit" value="Tallenna"></input>
+			<input type="submit" value="Tallenna" class="btn btn-sm btn-success"></input>
 		</form>
-		<a href="/cars" class="btn btn-sm btn-success">Palaa etusivulle</a>
+		
 	</div>
 </body>
 </html>

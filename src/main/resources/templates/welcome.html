@@ -6,28 +6,15 @@
     <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
 </head>
 <body>
-<h1>Autot</h1>
+<h1>Tervetuloa</h1>
 <h2><span th:text="${#authentication.getPrincipal().getUsername()}"></span></h2>
-<div class="col-md-4" style="padding:20px 0">
+	<div class="col-md-4" style="padding:20px 0">
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-danger"/>
 		</form>
 		
-	</div>
-    <table class="table table-striped">
-		<tr>
-		    <th>Auto</th>
-		    <th> </th>
-		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
-		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
-		</tr>  
-    	<tr th:each = "car : ${cars}">
-
-    		<td th:text="${car.name}"></td>
-    			<td><a th:href="@{/{car} (car=${car.carid})}" class="btn btn-xs btn-success">Valitse</a></td>
-    			
-    	</tr>
-     </table>
-     
+	</div>     
+<a th:href="@{/acars/{car} (car=${#authentication.getPrincipal().getUsername()})}" class="btn btn-xs btn-success">Sisään</a>
+<a sec:authorize="hasAuthority('ADMIN')" href="/cars" class="btn btn-xs btn-success">Admin</a>     
 </body>
 </html>

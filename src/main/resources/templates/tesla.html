@@ -7,6 +7,7 @@
 </head>
 <body>
 <h1>Kulut</h1>
+
 <div class="col-md-4" style="padding:20px 0">
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-danger"/>
@@ -17,7 +18,7 @@
 		    <th>Yritys</th>
 		    <th>Kwh</th>
 		    <th>€</th>	
-		    <th sec:authorize="hasAuthority('ADMIN')"> </th>	    
+		    <th> </th>	    
 		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
 		</tr>  
     	<tr th:each = "expense : ${expenses}">
@@ -25,12 +26,12 @@
     		<td th:text="${expense.company}"></td>
     		<td th:text="${expense.kwh}"></td>
     		<td th:text="${expense.price}"></td>    			    			
-    			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editexpense/{id}(id=${expense.id})}" class="btn btn-xs btn-success">Muokkaa</a></td>
+    			<td><a th:href="@{/editexpense/{id}(id=${expense.id})}" class="btn btn-xs btn-success">Muokkaa</a></td>
 				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${expense.id})}" class="btn btn-xs btn-danger">Poista</a></td>
     	</tr>
      </table>
     
-	<a href="/cars" class="btn btn-sm btn-success">Palaa etusivulle</a>
+	<a th:href="@{/acars/{car} (car=${#authentication.getPrincipal().getUsername()})}" class="btn btn-sm btn-success">Etusivulle</a>
 	<a th:href="@{/add/{id}(id=${number})}" class="btn btn-sm btn-success">Lisää laskuttaja</a>
 </body>
 </html>

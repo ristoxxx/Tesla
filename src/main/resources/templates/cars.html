@@ -7,12 +7,11 @@
 </head>
 <body>
 <h1>Autot</h1>
+<span th:text="${#authentication.getPrincipal().authorities}"></span>
 <div class="col-md-4" style="padding:20px 0">
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-danger"/>
 		</form>
-		<span th:text="${#authentication.getPrincipal().getUsername()}"></span>
-		<span th:text="${#authentication.getPrincipal().authorities}"></span>
 	</div>
     <table class="table table-striped">
 		<tr>
