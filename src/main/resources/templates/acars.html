@@ -3,7 +3,7 @@
 <head>
     <title>Etusivu</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{../css/bootstrap.min.css}" />
 </head>
 <body>
 <h1>Autot</h1>
@@ -17,15 +17,14 @@
     <table class="table table-striped">
 		<tr>
 		    <th>Auto</th>
-		    <th>  </th>
-		   
+		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
 		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
 		    <th sec:authorize="hasAuthority('ADMIN')"> </th>
 		</tr>  
     	<tr th:each = "car : ${cars}">
+
     		<td th:text="${car.name}"></td>
-    		
-    			<td ><a th:href="@{/{car} (car=${car.carid})}" class="btn btn-xs btn-success">Valitse</a></td>
+    			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/{car} (car=${car.carid})}" class="btn btn-xs btn-success">Valitse</a></td>
     			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editcar/{car} (car=${car.carid})}" class="btn btn-xs btn-success">Muokkaa autoa</a></td>
     			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletecar/{car} (car=${car.carid})}" class="btn btn-xs btn-danger">Poista auto</a></td>
     	</tr>

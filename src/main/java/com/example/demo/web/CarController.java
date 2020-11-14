@@ -3,7 +3,6 @@ package com.example.demo.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
-//import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.domain.Car;
 import com.example.demo.domain.CarRepository;
+import com.example.demo.domain.DriverRepository;
 //
 import com.example.demo.domain.Expense;
 //
@@ -33,6 +33,9 @@ public class CarController {
 	@Autowired
 	private CarRepository crepository;
 	
+	@Autowired
+	private DriverRepository drepository;
+	
 	//login page
 	@RequestMapping(value = "/login")
 	public String login() {
@@ -44,6 +47,12 @@ public class CarController {
     public String expenseLis(Model model) {	
         model.addAttribute("cars", crepository.findAll());
         return "cars";
+	}
+	
+	@RequestMapping(value = "/acars/{id}", method = RequestMethod.GET)	
+    public String expensLis(@PathVariable("id") String idu, Model model) {	
+        model.addAttribute("cars", crepository.findByDriver(drepository.findByUsername(idu)));
+        return "acars";
 	}
 	
 	//Show all expenses

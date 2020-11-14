@@ -12,6 +12,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.demo.domain.Car;
 import com.example.demo.domain.CarRepository;
+import com.example.demo.domain.Driver;
+import com.example.demo.domain.DriverRepository;
 
 
 
@@ -22,10 +24,13 @@ class CarRepositoryTests {
 
     @Autowired
     private CarRepository repository;
+    //private DriverRepository urepository;
+    Driver user2 = new Driver("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
+    //urepository.save(user2);
     
     @Test
     public  void findCar() {
-    	Car car = new Car("K");	    	
+    	Car car = new Car("K", user2);	    	
     	repository.save(car);
     	
     	Car testCar = repository.findByName("K");
@@ -36,7 +41,7 @@ class CarRepositoryTests {
     
     @Test
     public void createNewCar() {
-    	Car Car = new Car("K");	    	
+    	Car Car = new Car("K", user2);	    	
     	repository.save(Car);
     	assertThat(Car.getCarid()).isNotNull();
     }
@@ -44,7 +49,7 @@ class CarRepositoryTests {
     @Test
     public void deleteCar() {
     	
-    	Car Car1 = new Car("P");	    	
+    	Car Car1 = new Car("P", user2);	    	
     	repository.save(Car1);
     	
     	Car testCar1 = repository.findByName("P");
@@ -54,8 +59,6 @@ class CarRepositoryTests {
     	repository.deleteById(id);
     	
     	testCar1 = repository.findByName("P");
-    	assertThat(testCar1).isNull();
-		
+    	assertThat(testCar1).isNull();	
 	}
-
 }
