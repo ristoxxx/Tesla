@@ -33,6 +33,7 @@ public class CarController {
 	@Autowired
 	private CarRepository crepository;
 	
+	//Repository for driver data(is also user of database when signing in) 
 	@Autowired
 	private DriverRepository drepository;
 	
@@ -42,7 +43,7 @@ public class CarController {
 		return "login";
 	}
 	
-	//Show list of cars = main page
+	//Show list of cars = main page for admin operations
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/cars", method = RequestMethod.GET)	
     public String expenseLis(Model model) {	
@@ -50,18 +51,20 @@ public class CarController {
         return "cars";
 	}
 	
+	//Welcome page needed to direct user to his own vehicles
 	@RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)	
     public String exenseLis() {	      
         return "welcome";
 	}
 	
+	//Main page that shows only user related vehicles 
 	@RequestMapping(value = "/acars/{id}", method = RequestMethod.GET)	
     public String expensLis(@PathVariable("id") String idu, Model model) {	
         model.addAttribute("cars", crepository.findByDriver(drepository.findByUsername(idu)));
         return "acars";
 	}
 	
-	//Show all expenses
+	//Show ALL expenses lines for admin operations
 	@RequestMapping(value = "/main", method = RequestMethod.GET)	
     public String expeList(Model model) {	
         model.addAttribute("expenses", repository.findAll());
@@ -75,14 +78,14 @@ public class CarController {
         model.addAttribute("number", ide);
         return "tesla";
 	}
-	//Edit car
+	//Edit car page
 	@RequestMapping(value= "/editcar/{id}", method = RequestMethod.GET)
     public String editcar(@PathVariable("id") Long id, Model model){
     	model.addAttribute("car", crepository.findById(id)); 
     	return "editcar";
     }
 	
-	//Add car
+	//Add car page
 		@RequestMapping(value = "/addcar", method = RequestMethod.GET)
 	    public String addCar(Model model){
 	    	model.addAttribute("car", new Car());
@@ -91,14 +94,14 @@ public class CarController {
 		}
 	
 	
-	//Save car
+	//Save car page
 	@RequestMapping(value = "/savecar", method = RequestMethod.POST)
     public String save(Car car){
         crepository.save(car);
         return "redirect:welcome";
     }
 	
-	//Delete car
+	//Delete car. Admin only
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/deletecar/{id}", method = RequestMethod.GET)
     public String deleteCar(@PathVariable("id") Long cid, Model model) {
@@ -106,19 +109,19 @@ public class CarController {
         return "redirect:../cars";
     }
 	
-	//Save expense
+	//Save expense. redirects to welcome page because too much work to make this nice
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Expense expense){
         repository.save(expense);
         return "redirect:welcome";
     }
-	//Edit expense
+	//Edit expense page
 	@RequestMapping(value= "/editexpense/{id}", method = RequestMethod.GET)
     public String editbook(@PathVariable("id") Long id, Model model){
     	model.addAttribute("expense", repository.findById(id));  	
     	return "editexpense";
     }
-	//Add expense
+	//Add expense page
 	@RequestMapping(value = "/add/{id}", method = RequestMethod.GET)
     public String addExpense(@PathVariable("id") Long ids, Model model){
     	model.addAttribute("expense", new Expense());
@@ -126,7 +129,7 @@ public class CarController {
         return "addexpense";
 	}
 	
-	//Delete expense
+	//Delete expense. Admin only
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteExpense(@PathVariable("id") Long eid, Model model) {

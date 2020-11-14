@@ -11,16 +11,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.example.demo.web.CarController;
 
 
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
-//public class SmokeTests {
-//	
-//	@Autowired
-//	private CarController controller;
-//	
-//	@Test
-//	public void contextLoads() throws Exception {
-//		assertThat(controller).isNotNull();
-//	}
-//
-//}
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class SmokeTests {
+	
+	@Autowired
+	private CarController controller;
+	
+	@Test
+	public void contextLoads() throws Exception {
+		assertThat(controller).isNotNull();
+	}
+
+}

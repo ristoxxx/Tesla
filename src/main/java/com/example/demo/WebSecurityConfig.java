@@ -21,16 +21,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-        	.authorizeRequests().antMatchers("/css/**").permitAll() // Enable css when logged out
+        	.authorizeRequests().antMatchers("/css/**").permitAll() // Enable css 
         	.and()
         	.authorizeRequests()
         	.anyRequest().authenticated()
         	.and()
-        .formLogin()
-        	.defaultSuccessUrl("/welcome")
+        	.formLogin()//use default login form
+        	.defaultSuccessUrl("/welcome")//start page after login
         	.permitAll()
         	.and()
-        .logout()
+        	.logout()
         	.permitAll();
     }
     

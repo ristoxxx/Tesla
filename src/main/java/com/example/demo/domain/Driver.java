@@ -22,13 +22,13 @@ public class Driver {
     // Username with unique constraint
     @Column(name = "username", nullable = false, unique = true)
     private String username;
-
+    //BCrypt type of password for user
     @Column(name = "password", nullable = false)
     private String passwordHash;
 
     @Column(name = "role", nullable = false)
     private String role;
-    
+    //one driver can have many cars but car has only one driver(owner)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "driver")
 	private List<Car> cars;
     

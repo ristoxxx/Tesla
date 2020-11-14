@@ -9,16 +9,16 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Driver;
 import com.example.demo.domain.DriverRepository;
-
+//this class is used to authenticate users and defines witch repository is used to save userdata and credietials
 @Service
 public class UserDetailServiceImpl implements UserDetailsService  {
 	private final DriverRepository repository;
-
+	
 	@Autowired
 	public UserDetailServiceImpl(DriverRepository userRepository) {
 		this.repository = userRepository;
 	}
-
+	
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {   

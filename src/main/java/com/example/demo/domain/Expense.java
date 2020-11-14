@@ -17,7 +17,7 @@ public class Expense {
     private Double kwh;
     private Double price;
     
-    
+    //one car can have many expenses but expense belongs to one car only
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "carid")

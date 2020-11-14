@@ -47,15 +47,10 @@ public class RestController {
         
 	}
 	
+	//find user related expenses
 	@RequestMapping(value = "/rest/acars/{id}", method = RequestMethod.GET)	
     public @ResponseBody List<Car> epenseLis(@PathVariable("id") String did) {	
         return (List<Car>) crepository.findByDriver(drepository.findByUsername(did));
-        
-	}
-	
-	@RequestMapping(value = "/rest/expenses", method = RequestMethod.GET)	
-    public @ResponseBody List<Expense> xpenseLis() {	
-        return (List<Expense>) repository.findAll();
         
 	}
 	
@@ -80,14 +75,14 @@ public class RestController {
 	}
 //	
 //	
-//	//Save car
+//	//Save car NOT READY
 //	@RequestMapping(value = "/savecar", method = RequestMethod.POST)
 //    public String save(Car car){
 //        crepository.save(car);
 //        return "redirect:cars";
 //    }
 //	
-//	//Delete car
+	//Delete car. admin only
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "rest/deletecar/{id}", method = RequestMethod.GET)
     public String deleteCar(@PathVariable("id") Long cid, Model model) {
@@ -102,7 +97,7 @@ public class RestController {
 
     }
 
-//	//Add expense
+//	//Add expense NOT READY
 //	@RequestMapping(value = "/add/{id}", method = RequestMethod.GET)
 //    public String addExpense(@PathVariable("id") Long ids, Model model){
 //    	model.addAttribute("expense", new Expense());
@@ -110,7 +105,7 @@ public class RestController {
 //        return "addexpense";
 //	}
 //	
-//	//Delete expense
+//	//Delete expense NOT READY
 //    @PreAuthorize("hasAuthority('ADMIN')")
 //    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 //    public String deleteExpense(@PathVariable("id") Long eid, Model model) {
